@@ -1,0 +1,28 @@
+import java.io.IOException;
+
+public class FlashNodeMCU {
+
+    public static void main(String[] args) {
+        try {
+            // Replace with the actual path to esptool.py and firmware file
+            String[] command = {"python", "path/to/esptool.py", 
+                               "--port", "COM3", 
+                               "write_flash", 
+                               "0x00000", 
+                               "path/to/firmware.bin"}; 
+            ProcessBuilder processBuilder = new ProcessBuilder(command);
+            Process process = processBuilder.start();
+            // Handle output and errors (optional)
+            // ...
+
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                System.out.println("Flashing successful!");
+            } else {
+                System.err.println("Flashing failed.");
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
